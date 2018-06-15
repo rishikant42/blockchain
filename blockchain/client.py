@@ -9,6 +9,9 @@ from Crypto.Signature import PKCS1_v1_5
 
 
 class Wallet:
+    def __init__(self):
+        self.balance = 1
+
     def new_wallet(self):
         random_generator = Random.new().read
         key = RSA.generate(1024, random_generator)
@@ -19,6 +22,7 @@ class Wallet:
         response = {
             'private_key': hexlify(private_key).decode('ascii'),
             'address': hexlify(public_key).decode('ascii'),
+            'balance': self.balance,
         }
         return response
 
