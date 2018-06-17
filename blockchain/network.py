@@ -26,10 +26,39 @@ class Blockchain:
         self.transactions = []
         self.chain = []
         self.nodes = set()
+        #Balance (store publickeys and their balance)
+        self.balance = {
+            }
         #Generate random number to be used as node_id
         self.node_id = str(uuid4()).replace('-', '')
         #Create genesis block
         self.create_block(0, '00')
+
+
+    def genesis_transaction(self, recipient_address):
+        """
+        create genesis block and send 50 coin to recipient address
+        """
+
+        transaction = OrderedDict({'sender_address': "Author",
+                                    'recipient_address': recipient_address,
+                                    'value': 50})
+
+        self.transactions.append(transaction)
+
+        block = {'block_number': 1,
+                'timestamp': time(),
+                'transactions': self.transactions,
+                'nonce': "I'm special. I didn't go through mining process",
+                'previous_hash': "00000"}
+
+        self.chain.append(block)
+        self.balance[recipient_address] = 50
+
+        print self.balance
+        self.transactions = []
+
+        return block
 
 
     def register_node(self, node_url):
@@ -58,11 +87,17 @@ class Blockchain:
         return verifier.verify(h, binascii.unhexlify(signature))
 
 
+    def verify_balance(self, sender_address, amount):
+        if sender_address in self.balance.keys() and self.balance[sender_address] >= amount:
+            return True
+        else:
+            return False
+
     def submit_transaction(self, sender_address, recipient_address, value, signature):
         """
         Add a transaction to transactions array if the signature verified
         """
-        transaction = OrderedDict({'sender_address': sender_address, 
+        transaction = OrderedDict({'sender_address': sender_address,
                                     'recipient_address': recipient_address,
                                     'value': value})
 
@@ -73,8 +108,16 @@ class Blockchain:
         #Manages transactions from wallet to another wallet
         else:
             transaction_verification = self.verify_transaction_signature(sender_address, signature, transaction)
-            if transaction_verification:
+            balance_verification = self.verify_balance(sender_address, value)
+            if transaction_verification and balance_verification:
                 self.transactions.append(transaction)
+                if recipient_address in self.balance.keys():
+                    self.balance[recipient_address] += value
+                else:
+                    self.balance[recipient_address] = value
+
+                self.balance[sender_address] -= value
+
                 return len(self.chain) + 1
             else:
                 return False
@@ -195,6 +238,9 @@ class Blockchain:
 
 blockchain = Blockchain()
 
+def create_genesis_transaction(recipient_address):
+    return blockchain.genesis_transaction(recipient_address)
+
 def new_transaction(sender_address, recipient_address, amount, signature):
     values = {
         'sender_address': sender_address,
@@ -291,3 +337,6 @@ def get_nodes():
     response = {'nodes': nodes}
     return response
 
+
+def get_all_balances():
+    return blockchain.balance
