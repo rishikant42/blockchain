@@ -23,6 +23,7 @@ class Blockchain:
 
     def __init__(self):
 
+        self.genesis_block = False
         self.transactions = []
         self.chain = []
         self.nodes = set()
@@ -40,6 +41,9 @@ class Blockchain:
         create genesis block and send 50 coin to recipient address
         """
 
+        if self.genesis_block:
+            return "Genesis block is already created"
+
         transaction = OrderedDict({'sender_address': "Author",
                                     'recipient_address': recipient_address,
                                     'value': 50})
@@ -53,9 +57,9 @@ class Blockchain:
                 'previous_hash': "00000"}
 
         self.chain.append(block)
+        self.genesis_block = True
         self.balance[recipient_address] = 50
 
-        print self.balance
         self.transactions = []
 
         return block
