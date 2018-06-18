@@ -64,8 +64,8 @@ None
 ```
 
 ## Genesis block/transaction
-==> A genesis block is the first block of a block chain. The genesis block is almost always hardcoded into the software of the applications that utilize its block chain. It is a special case in that it does not reference a previous block.
-==> In our case, Genesis transaction will send 50 coin to given address.
+==> A genesis block is the first block of a block chain. The genesis block is almost always hardcoded into the software of the applications that utilize its block chain. It is a special case in that it does not reference a previous block.\
+==> In our case, Genesis transaction will send 50 coin to given address.\
 
 ```
 In [9]: create_genesis_transaction(alice_wallet['address'])
@@ -112,9 +112,9 @@ u'78eba5404647d3e6ed9d34c6040226ab2924b03dcc2ee7706c5030d85b0cc7984cfa1572d63b46
 ```
 
 ## Mining
-==> One of the miner will pick the transaction & add it block if it is valid. In our case, we will have to manually submit the transaction to the network
-==> To mine a block, miners need to find an extremely rare solution to a cryptographic puzzle. If a mined block is accepted by the blockchain, the miner receive a reward in coins which is an additional incentive to transaction fees.
-==> The mining process is also referred to as Proof of Work (PoW), and it's the main mechanism that enables the blockchain to be trustless and secure.
+==> One of the miner will pick the transaction & add it block if it is valid. In our case, we will have to manually submit the transaction to the network.\
+==> To mine a block, miners need to find an extremely rare solution to a cryptographic puzzle. If a mined block is accepted by the blockchain, the miner receive a reward in coins which is an additional incentive to transaction fees. \
+==> The mining process is also referred to as Proof of Work (PoW), and it's the main mechanism that enables the blockchain to be trustless and secure.\
 
 ```
 In [14]: from blockchain.network import new_transaction
@@ -146,26 +146,26 @@ Out[17]:
 
 ==> Since blockchain is public ledger, one can check complete blockchain & can verify his/her transaction in chain
 ```
-In [18]: from blockchain.network import full_chain                                                       [23/572]
-                                                                                                                 
-In [19]: full_chain()                                                                                            
-Out[19]:                                                                                                         
-{'chain': [{'block_number': 1,                                                                                   
-   'nonce': 0,                                                                                                   
-   'previous_hash': '00',                                                                                        
-   'timestamp': 1529314632.98755,                                                                                
-   'transactions': []},                                                                                          
-  {'block_number': 1,                                                                                            
-   'nonce': "I'm special. I didn't go through mining process",                                                   
-   'previous_hash': '00000',                                                                                     
-   'timestamp': 1529315091.63091,                                                                                
-   'transactions': [OrderedDict([('sender_address', 'Author'),                                                   
-                 ('recipient_address',                                                                           
+In [18]: from blockchain.network import full_chain
+
+In [19]: full_chain()
+Out[19]:
+{'chain': [{'block_number': 1,
+   'nonce': 0,
+   'previous_hash': '00',
+   'timestamp': 1529314632.98755,
+   'transactions': []},
+  {'block_number': 1,
+   'nonce': "I'm special. I didn't go through mining process",
+   'previous_hash': '00000',
+   'timestamp': 1529315091.63091,
+   'transactions': [OrderedDict([('sender_address', 'Author'),
+                 ('recipient_address',
                   u'30819f300d06092a864886f70d010101050003818d0030818902818100a14e2c39b663192c1f191b97e0448da2e4a
 49599f318903af71e2c5b0061b68555fa86a37661fa66e391ba226f1b91b64cad657af93adbdd0b011150d6796b8512497ab79f92513d24c1
 99008136b8d9ae8430559fead5ee00ba70afa4c5c4de56cdba1ef22c84f327be218047e7f9355c7d4a13bfa248703a141000b2f3540902030
-10001'),                                                                                                         
-                 ('value', 50)])]},   
+10001'),
+                 ('value', 50)])]},
   {'block_number': 3,
    'nonce': 104,
    'previous_hash': 'feb69b361108c517144464d04a7dcb30a7f109ea48d74f0985f9efe97666bf9f',

@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='blockchainpy',
-      version='0.0.3',
+      version='0.0.4',
       description='A blockchain implementation in Python',
       url='https://github.com/rishikant42/blockchain',
       author='Rishi kant',
