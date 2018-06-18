@@ -64,10 +64,13 @@ None
 ```
 
 ## Genesis block/transaction
-==> A genesis block is the first block of a block chain. The genesis block is almost always hardcoded into the software of the applications that utilize its block chain. It is a special case in that it does not reference a previous block.\
-==> In our case, Genesis transaction will send 50 coin to given address.\
+==> A genesis block is the first block of a block chain. The genesis block is almost always hardcoded into the software of the applications that utilize its block chain. It is a special case in that it does not reference a previous block.
+
+==> In our case, Genesis transaction will send 50 coin to given address.
 
 ```
+In [8]: from blockchain.network import create_genesis_transaction
+
 In [9]: create_genesis_transaction(alice_wallet['address'])
 Out[9]: 
 {'block_number': 1,
@@ -85,6 +88,7 @@ In [10]: print check_balance(alice_wallet['address'])
 
 ## Create new transaction
 ==> One can create a transaction using blockchain client and submit it blockchain network. Miner will pick the transaction and add to blockchain if it is valid.
+
 ==> Send 10 coin from Alice-wallet to Bob-wallet
 
 ```
@@ -112,9 +116,11 @@ u'78eba5404647d3e6ed9d34c6040226ab2924b03dcc2ee7706c5030d85b0cc7984cfa1572d63b46
 ```
 
 ## Mining
-==> One of the miner will pick the transaction & add it block if it is valid. In our case, we will have to manually submit the transaction to the network.\
-==> To mine a block, miners need to find an extremely rare solution to a cryptographic puzzle. If a mined block is accepted by the blockchain, the miner receive a reward in coins which is an additional incentive to transaction fees. \
-==> The mining process is also referred to as Proof of Work (PoW), and it's the main mechanism that enables the blockchain to be trustless and secure.\
+==> One of the miner will pick the transaction & add it block if it is valid. In our case, we will have to manually submit the transaction to the network.
+
+==> To mine a block, miners need to find an extremely rare solution to a cryptographic puzzle. If a mined block is accepted by the blockchain, the miner receive a reward in coins which is an additional incentive to transaction fees.
+
+==> The mining process is also referred to as Proof of Work (PoW), and it's the main mechanism that enables the blockchain to be trustless and secure.
 
 ```
 In [14]: from blockchain.network import new_transaction
