@@ -343,3 +343,9 @@ def get_nodes():
 
 def get_all_balances():
     return blockchain.balance
+
+
+def check_balance(address):
+    return blockchain.balance.get(address)
+
+
