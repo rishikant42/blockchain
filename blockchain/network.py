@@ -303,12 +303,11 @@ def mine():
     return response
 
 
-def register_nodes():
-    values = request.form
-    nodes = values.get('nodes').replace(" ", "").split(',')
+def register_nodes(nodes):
+    nodes = nodes.replace(" ", "").split(',')
 
     if nodes is None:
-        return "Error: Please supply a valid list of nodes", 400
+        return "Error: Please supply a valid list of nodes"
 
     for node in nodes:
         blockchain.register_node(node)
