@@ -32,45 +32,34 @@ pip install blockchainpy
 
 ### Examples:
 
+## create wallet
+
+==> It's a key-pair of `privat_key` & `address`. Address is public address to recieve coin. Private-key is use to send coins to some address.
+
 ```
-In [1]: from blockchain.client import make_wallet, make_transaction
+In [1]: from blockchain.client import create_wallet
 
-In [2]: alice_wallet = make_wallet()
+In [2]: alice_wallet = create_wallet()
 
-In [3]: print alice_wallet
-{'private_key': u'3082025b02010002818100a3137c6536846d90ad3491019fd7cdc7c08cd9755b6d7e3eb633cd0becebcd826c74cdac10da76749509f805c8308e1857c8dfed211b07e0aa88821fd9898a3f5981b1c2cee4fa0c97be8c464d20f1e220336ec4411a87ef5a3923d15ca25586abe846e7bd8e392351c380e8b2caaf6864163bf7e5e0ae9b3997688f309a340d02030100010281807f5fb7f902451ba336766990a03e1a401c98a73db024ecc7a4deff18827c87ef88310f78874d6bda9192d0c40b62498a9ffe8951195b98a295f0bbda8eba8c5cc161052fe7e3b9745a8a1bb527391f020d8a973a3aad2c3e9c5a9492178fe7504e5eea2ed15077a339f5492c1b4edb5d966b82183d0ed750d08035caade851e1024100c3f436793b89a326f996a0574b8103ac8a684c4fd6095f836da23a8d8587d5aef8978f9849cdd96cdc33a229eddb0c30611bfb08e1df4add5516e9f34de040b5024100d50c2416cb587dfade0d6799503342d10e47fa41cc3ef2b89b8fa666fb6d248c02c19a401dcaa42dd11fc536766ca5645cbb3a3f9cb90c15ac1fec1f7d8cb4f90240204e8230a8ad3f95ec6e760f0e66bde953847098750c648ff1a25e8ef8a5f587fc7a58755e2daf1c308ddebd94f69962dc8fd56a987acd0802c05d5ffcc5ed4502403b9222813128b449324fc3390e40d71d07863ec6a92aacc9cbcd95f4d3b6c7f2524efa27956cf50d4e9d3892aaf86422b4ff31215a5c2fb1dba82d68fcbd1c59024061ea7f0763b53cf06f23e6c7f3835223b62afb63ae54440410c7f96b957cd85ef2652f9370db7738e8d8aa79b5e4afc42c9b1f0c8ca7124cecb7c9ec3914f9a1', 'address': u'30819f300d06092a864886f70d010101050003818d0030818902818100a3137c6536846d90ad3491019fd7cdc7c08cd9755b6d7e3eb633cd0becebcd826c74cdac10da76749509f805c8308e1857c8dfed211b07e0aa88821fd9898a3f5981b1c2cee4fa0c97be8c464d20f1e220336ec4411a87ef5a3923d15ca25586abe846e7bd8e392351c380e8b2caaf6864163bf7e5e0ae9b3997688f309a340d0203010001'}
+In [3]: bob_wallet = create_wallet()
 
-In [4]: bob_wallet = make_wallet()
+In [4]: print alice_wallet
+{'private_key': u'3082025b02010002818100a14e2c39b663192c1f191b97e0448da2e4a49599f318903af71e2c5b0061b68555fa86a37661fa66e391ba226f1b91b64cad657af93adbdd0b011150d6796b8512497ab79f92513d24c199008136b8d9ae8430559fead5ee00ba70afa4c5c4de56cdba1ef22c84f327be218047e7f9355c7d4a13bfa248703a141000b2f35409020301000102818059f5c50872c595d65b899f2ff6ad84e861e7c05f598a4b75f737e6b8e1df9cf183dff292db850d27b0a7274de8f551308056fc0fb74bb22ef6e2238c17f1239af2ca25a20dc7b78de01df3681dcf452b8b3e549c0bb4079b510cf7d7df4c9ae18f3d96b786e3b194c3c95e53dd4aaf95b4540c1dd2d4e9367ab6836890aaf201024100c9906133f3a7c42326f742469fb29ebf358c0e3a2049f517f519db7063dd9a3d0183e42974c242d0c73992d10fa9ee6c2846f03d4f6d0a6548f82e66867d3629024100ccde6a2152f3a216b3a56a9e062a714c7e31f9620716578840d415bd0da22e2526486840bb12165e9320e6f49e786c159034b90d665e7b71eaac14b5ec642ae10240212de7124a357f8fd9c631deb6430ce6a4c5dd41ac370065652f5073fbbc6abb481891e25119f92dacddc95128a6ec5c5974f3eee3b82b51e8e5119e46dd2da102407ef59ec3c40a63fab99ddb72ced3629f4add6174d47b8e074c55a29b2465cb3f0e7874d3189b5eed813434ac87c08d0ad7f134750f69a20ab8a9a7b40e290d4102402a9aeaeb5d1a10c191dac5ccf12a91f1dfa8db5b01adf110f52fc35991c569cb42d6bab579b8a15b99da88fdfb0f1c78b581834535e94541b02260ea697eab0e', 'address': u'30819f300d06092a864886f70d010101050003818d0030818902818100a14e2c39b663192c1f191b97e0448da2e4a49599f318903af71e2c5b0061b68555fa86a37661fa66e391ba226f1b91b64cad657af93adbdd0b011150d6796b8512497ab79f92513d24c199008136b8d9ae8430559fead5ee00ba70afa4c5c4de56cdba1ef22c84f327be218047e7f9355c7d4a13bfa248703a141000b2f354090203010001'}
 
-In [5]:
-In [6]: create_genesis_transaction(alice_wallet['address'])
-Out[6]: 
-{'block_number': 1,
- 'nonce': "I'm special. I didn't go through mining process",
- 'previous_hash': '00000',
- 'timestamp': 1529263303.059447,
- 'transactions': [OrderedDict([('sender_address', 'Author'),
-               ('recipient_address',
-                u'30819f300d06092a864886f70d010101050003818d0030818902818100a3137c6536846d90ad3491019fd7cdc7c08cd9755b6d7e3eb633cd0becebcd826c74cdac10da76749509f805c8308e1857c8dfed211b07e0aa88821fd9898a3f5981b1c2cee4fa0c97be8c464d20f1e220336ec4411a87ef5a3923d15ca25586abe846e7bd8e392351c380e8b2caaf6864163bf7e5e0ae9b3997688f309a340d0203010001'),
-               ('value', 50)])]} 
+```
 
-In [8]: txn=make_transaction(alice_wallet['address'], alice_wallet['private_key'], bob_wallet['address'], 10)
-   ...: 
-   ...: sign = txn.get('signature')
-   ...: 
-   ...: sender = txn.get('transaction').get('sender_address')
-   ...: 
-   ...: reciver = txn.get('transaction').get('recipient_address')
-   ...: 
-   ...: value = txn.get('transaction').get('value')
-   ...: 
+## check-Balance
 
-In [9]: print new_transaction(a, r, v, s)
+==> Amount of coins that particular address have.
 
-In [9]: print new_transaction(sender, reciver, value, sign)
-{'message': 'Transaction will be added to Block 3'}
+```
+In [5]: from blockchain.network import check_balance
 
+In [6]: print check_balance(alice_wallet['address'])
+None
 
+In [7]: print check_balance(bob_wallet['address'])
+None
 
 ```
 
