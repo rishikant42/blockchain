@@ -242,7 +242,7 @@ class Blockchain:
 
 blockchain = Blockchain()
 
-def make_genesis_transaction(recipient_address):
+def create_genesis_transaction(recipient_address):
     return blockchain.genesis_transaction(recipient_address)
 
 def new_transaction(sender_address, recipient_address, amount, signature):

@@ -48,12 +48,12 @@ class Transaction:
         return hexlify(signer.sign(h)).decode('ascii')
 
 
-def make_wallet():
+def create_wallet():
     w = Wallet()
     new_wallet = w.new_wallet()
     return new_wallet
 
-def make_transaction(sender_address, sender_pvt_key, recipient_address, value):
+def create_transaction(sender_address, sender_pvt_key, recipient_address, value):
     transaction = Transaction(sender_address, sender_pvt_key, recipient_address, value)
     response = {
         'transaction': transaction.to_dict(),
